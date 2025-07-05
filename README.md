@@ -1,6 +1,6 @@
-# TidyFinder
+# TidyFinder for macOS
 
-A macOS utility application that provides a user-friendly interface for managing Finder preferences and view settings.
+A simple GUI utility to set and enforce consistent view settings across all Finder windows.
 
 ## Overview
 
