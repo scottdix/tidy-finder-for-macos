@@ -1,0 +1,482 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		14666BD6C82ADA820FAD9C10 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFF48CFB224AF426CDE96BB /* ContentViewModel.swift */; };
+		15C68B4DB4A288982F8B6292 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C415E872CDA5A7767AC07 /* ContentView.swift */; };
+		D7240F7AF618EBA2E4BD9999 /* TidyFinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192666AF36625013CC497762 /* TidyFinderApp.swift */; };
+		D7EB6ADF8152A636E748CF08 /* TidyFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B4F29EF2313FB23B5F4AA7 /* TidyFinderTests.swift */; };
+		FBAC5CF86C77792EEB1CAD1C /* TidyFinderCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0B2470EE549B9039D9798549 /* TidyFinderCore */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7329CB72F8184A3A5C9D192A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA4CE5A34E9567845EF85E30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DD760FC4EF8E5F077FEFA9DE;
+			remoteInfo = TidyFinder;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		17B4F29EF2313FB23B5F4AA7 /* TidyFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidyFinderTests.swift; sourceTree = "<group>"; };
+		192666AF36625013CC497762 /* TidyFinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidyFinderApp.swift; sourceTree = "<group>"; };
+		1929A4C42482341A668E6289 /* tidyfinder */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tidyfinder; path = ..; sourceTree = SOURCE_ROOT; };
+		281C415E872CDA5A7767AC07 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		56DA7E1A881D671C87217C27 /* TidyFinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TidyFinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A8250027DF7AA9A4841A58E /* TidyFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TidyFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DFF48CFB224AF426CDE96BB /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		66766B4BD421E913DC5A6B02 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBAC5CF86C77792EEB1CAD1C /* TidyFinderCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		29E0C47DF1DDC5832981FC47 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				1929A4C42482341A668E6289 /* tidyfinder */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		31946B76AC09919B5FC91004 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7DFF48CFB224AF426CDE96BB /* ContentViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		58A65C8E9809A5B11C04A130 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D41DBABD23EB8B5644F629D2 /* TidyFinderTests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		67368C62E53A745FEF75CBC8 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				A4EEAF21B77A342F0CA3DF7C /* TidyFinder */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		A4EEAF21B77A342F0CA3DF7C /* TidyFinder */ = {
+			isa = PBXGroup;
+			children = (
+				31946B76AC09919B5FC91004 /* ViewModels */,
+				281C415E872CDA5A7767AC07 /* ContentView.swift */,
+				192666AF36625013CC497762 /* TidyFinderApp.swift */,
+			);
+			path = TidyFinder;
+			sourceTree = "<group>";
+		};
+		C098A59F0C51850C4538BF0C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5A8250027DF7AA9A4841A58E /* TidyFinder.app */,
+				56DA7E1A881D671C87217C27 /* TidyFinderTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D1CFD7696E0351645A17B864 = {
+			isa = PBXGroup;
+			children = (
+				29E0C47DF1DDC5832981FC47 /* Packages */,
+				67368C62E53A745FEF75CBC8 /* Sources */,
+				58A65C8E9809A5B11C04A130 /* Tests */,
+				C098A59F0C51850C4538BF0C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D41DBABD23EB8B5644F629D2 /* TidyFinderTests */ = {
+			isa = PBXGroup;
+			children = (
+				17B4F29EF2313FB23B5F4AA7 /* TidyFinderTests.swift */,
+			);
+			path = TidyFinderTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3D853EFD8484F673CDAE7119 /* TidyFinderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B98F1BBB5B289C6397EAC436 /* Build configuration list for PBXNativeTarget "TidyFinderTests" */;
+			buildPhases = (
+				A03754E3034CA157527E052D /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C693C632569089274EAB9EBD /* PBXTargetDependency */,
+			);
+			name = TidyFinderTests;
+			packageProductDependencies = (
+			);
+			productName = TidyFinderTests;
+			productReference = 56DA7E1A881D671C87217C27 /* TidyFinderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DD760FC4EF8E5F077FEFA9DE /* TidyFinder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C3AE87B8B2DA0DED579755A7 /* Build configuration list for PBXNativeTarget "TidyFinder" */;
+			buildPhases = (
+				20F14397A9864FE38CCA51BB /* Sources */,
+				66766B4BD421E913DC5A6B02 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TidyFinder;
+			packageProductDependencies = (
+				0B2470EE549B9039D9798549 /* TidyFinderCore */,
+			);
+			productName = TidyFinder;
+			productReference = 5A8250027DF7AA9A4841A58E /* TidyFinder.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA4CE5A34E9567845EF85E30 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					3D853EFD8484F673CDAE7119 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					DD760FC4EF8E5F077FEFA9DE = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 3BE64104894DFCA24D68389C /* Build configuration list for PBXProject "TidyFinder" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = D1CFD7696E0351645A17B864;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2BE2AD1AEE61B6CA67431A92 /* XCLocalSwiftPackageReference ".." */,
+			);
+			preferredProjectObjectVersion = 54;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DD760FC4EF8E5F077FEFA9DE /* TidyFinder */,
+				3D853EFD8484F673CDAE7119 /* TidyFinderTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		20F14397A9864FE38CCA51BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15C68B4DB4A288982F8B6292 /* ContentView.swift in Sources */,
+				14666BD6C82ADA820FAD9C10 /* ContentViewModel.swift in Sources */,
+				D7240F7AF618EBA2E4BD9999 /* TidyFinderApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A03754E3034CA157527E052D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7EB6ADF8152A636E748CF08 /* TidyFinderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C693C632569089274EAB9EBD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DD760FC4EF8E5F077FEFA9DE /* TidyFinder */;
+			targetProxy = 7329CB72F8184A3A5C9D192A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		26B550E1FB4605AA3F4FFCCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Resources/TidyFinder.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.scottdix.TidyFinder;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		38B1C93AFA5C1D3983AD231E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.scottdix.TidyFinder;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		461D7E683E1DA85D61076D8F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.scottdix.TidyFinderTests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TidyFinder.app/Contents/MacOS/TidyFinder";
+			};
+			name = Release;
+		};
+		5DDBCEBA827C22CC63DA123C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.scottdix.TidyFinderTests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TidyFinder.app/Contents/MacOS/TidyFinder";
+			};
+			name = Debug;
+		};
+		D3165D470ECF5D1696B780A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.scottdix.TidyFinder;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		F759BFB22CFB4736BDC23888 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Resources/TidyFinder.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.scottdix.TidyFinder;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3BE64104894DFCA24D68389C /* Build configuration list for PBXProject "TidyFinder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38B1C93AFA5C1D3983AD231E /* Debug */,
+				D3165D470ECF5D1696B780A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B98F1BBB5B289C6397EAC436 /* Build configuration list for PBXNativeTarget "TidyFinderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5DDBCEBA827C22CC63DA123C /* Debug */,
+				461D7E683E1DA85D61076D8F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C3AE87B8B2DA0DED579755A7 /* Build configuration list for PBXNativeTarget "TidyFinder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26B550E1FB4605AA3F4FFCCD /* Debug */,
+				F759BFB22CFB4736BDC23888 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		2BE2AD1AEE61B6CA67431A92 /* XCLocalSwiftPackageReference ".." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ..;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0B2470EE549B9039D9798549 /* TidyFinderCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TidyFinderCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = AA4CE5A34E9567845EF85E30 /* Project object */;
+}

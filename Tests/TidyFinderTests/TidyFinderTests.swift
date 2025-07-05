@@ -1,5 +1,5 @@
 import XCTest
-@testable import TidyFinder
+@testable import TidyFinderCore
 
 final class TidyFinderTests: XCTestCase {
     func testViewStyleRawValues() {

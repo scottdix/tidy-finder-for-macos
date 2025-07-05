@@ -9,20 +9,33 @@ let package = Package(
         .macOS(.v11)
     ],
     products: [
+        // Library that can be imported by external projects
+        .library(
+            name: "TidyFinderCore",
+            targets: ["TidyFinderCore"]
+        ),
+        // Executable CLI tool
         .executable(
             name: "tidyfinder",
-            targets: ["TidyFinder"]
+            targets: ["tidyfinder"]
         )
     ],
     dependencies: [],
     targets: [
-        .executableTarget(
-            name: "TidyFinder",
+        // Library target containing core logic
+        .target(
+            name: "TidyFinderCore",
             dependencies: []
         ),
+        // Executable target that depends on the library
+        .executableTarget(
+            name: "tidyfinder",
+            dependencies: ["TidyFinderCore"]
+        ),
+        // Test target
         .testTarget(
             name: "TidyFinderTests",
-            dependencies: ["TidyFinder"]
+            dependencies: ["TidyFinderCore"]
         )
     ]
 )

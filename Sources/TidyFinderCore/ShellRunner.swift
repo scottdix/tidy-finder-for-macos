@@ -1,13 +1,13 @@
 import Foundation
 
-struct ShellRunner {
-    enum ShellError: Error {
+public struct ShellRunner {
+    public enum ShellError: Error {
         case commandFailed(exitCode: Int32, output: String)
         case invalidCommand
     }
     
     @discardableResult
-    static func execute(command: String) throws -> String {
+    public static func execute(command: String) throws -> String {
         let task = Process()
         let pipe = Pipe()
         let errorPipe = Pipe()

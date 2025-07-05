@@ -1,4 +1,5 @@
 import Foundation
+import TidyFinderCore
 
 print("TidyFinder - Finder Preferences Manager")
 print("Version 0.1.0")
