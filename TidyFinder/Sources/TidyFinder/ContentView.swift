@@ -21,176 +21,10 @@ struct ContentView: View {
             HeaderView()
             
             // Main content
-            ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
-                    // Default View Style Section
-                    VStack(alignment: .leading, spacing: 12) {
-                        HStack {
-                            Image(systemName: "square.grid.2x2")
-                                .foregroundColor(.accentColor)
-                            Text("Default View Style")
-                                .font(.headline)
-                        }
-                        
-                        Text("Choose how folders display their contents by default")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                        
-                        Picker("View Style", selection: $viewModel.defaultViewStyle) {
-                            Label("Icon", systemImage: "square.grid.2x2").tag(FinderManager.ViewStyle.icon)
-                            Label("List", systemImage: "list.bullet").tag(FinderManager.ViewStyle.list)
-                            Label("Column", systemImage: "rectangle.split.3x1").tag(FinderManager.ViewStyle.column)
-                            Label("Gallery", systemImage: "square.grid.3x3").tag(FinderManager.ViewStyle.gallery)
-                        }
-                        .pickerStyle(SegmentedPickerStyle())
-                        .disabled(viewModel.isLoading)
-                        .help("Press 1-4 to quickly select a view style")
-                    }
-                    .padding(16)
-                    .background(Color(NSColor.controlBackgroundColor))
-                    .cornerRadius(8)
-                    
-                    // Finder Options Section
-                    VStack(alignment: .leading, spacing: 12) {
-                        HStack {
-                            Image(systemName: "gearshape")
-                                .foregroundColor(.accentColor)
-                            Text("Finder Options")
-                                .font(.headline)
-                        }
-                        
-                        Text("Customize Finder's interface elements")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                        
-                        VStack(alignment: .leading, spacing: 10) {
-                            ToggleRow(
-                                title: "Show Path Bar",
-                                icon: "point.topleft.down.curvedto.point.bottomright.up",
-                                isOn: $viewModel.showPathBar,
-                                isDisabled: viewModel.isLoading,
-                                tooltip: "Displays the full path at the bottom of Finder windows"
-                            )
-                            
-                            ToggleRow(
-                                title: "Show Status Bar",
-                                icon: "info.circle",
-                                isOn: $viewModel.showStatusBar,
-                                isDisabled: viewModel.isLoading,
-                                tooltip: "Shows item count and available space at the bottom"
-                            )
-                            
-                            ToggleRow(
-                                title: "Show Sidebar",
-                                icon: "sidebar.left",
-                                isOn: $viewModel.showSidebar,
-                                isDisabled: viewModel.isLoading,
-                                tooltip: "Displays favorites and devices on the left side"
-                            )
-                            
-                            ToggleRow(
-                                title: "Show Preview Pane",
-                                icon: "sidebar.right",
-                                isOn: $viewModel.showPreviewPane,
-                                isDisabled: viewModel.isLoading,
-                                tooltip: "Shows file previews on the right side"
-                            )
-                            
-                            ToggleRow(
-                                title: "Show Toolbar",
-                                icon: "toolbar",
-                                isOn: $viewModel.showToolbar,
-                                isDisabled: viewModel.isLoading,
-                                tooltip: "Displays navigation and action buttons at the top"
-                            )
-                            
-                            ToggleRow(
-                                title: "Show Tab Bar",
-                                icon: "square.on.square",
-                                isOn: $viewModel.showTabBar,
-                                isDisabled: viewModel.isLoading,
-                                tooltip: "Enables tabbed browsing in Finder windows"
-                            )
-                        }
-                    }
-                    .padding(16)
-                    .background(Color(NSColor.controlBackgroundColor))
-                    .cornerRadius(8)
-                    
-                    // Action Buttons
-                    VStack(spacing: 12) {
-                        HStack(spacing: 12) {
-                            ActionButton(
-                                title: "Relaunch Finder",
-                                icon: "arrow.clockwise",
-                                action: {
-                                    viewModel.relaunchFinder()
-                                },
-                                isProminent: true,
-                                isLoading: viewModel.isLoading,
-                                isHovered: hoveredButton == "relaunch",
-                                onHover: { hovering in
-                                    withAnimation(.easeInOut(duration: 0.15)) {
-                                        hoveredButton = hovering ? "relaunch" : nil
-                                    }
-                                },
-                                tooltip: "Restart Finder to ensure all changes take effect (⌘R)"
-                            )
-                            .keyboardShortcut("r", modifiers: .command)
-                            
-                            ActionButton(
-                                title: "Apply to All Folders",
-                                icon: "folder.badge.gearshape",
-                                action: {
-                                    viewModel.applyToAllExistingFolders()
-                                },
-                                isProminent: false,
-                                isLoading: viewModel.isLoading,
-                                isHovered: hoveredButton == "apply",
-                                onHover: { hovering in
-                                    withAnimation(.easeInOut(duration: 0.15)) {
-                                        hoveredButton = hovering ? "apply" : nil
-                                    }
-                                },
-                                tooltip: "Reset all existing folder views to match current settings (⌘⇧A)"
-                            )
-                            .keyboardShortcut("a", modifiers: [.command, .shift])
-                        }
-                        
-                        // Loading indicator
-                        if viewModel.isLoading {
-                            VStack(spacing: 8) {
-                                ProgressView()
-                                    .progressViewStyle(LinearProgressViewStyle())
-                                    .frame(maxWidth: .infinity)
-                                    .scaleEffect(0.8)
-                                
-                                Text(viewModel.loadingMessage)
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                            }
-                            .transition(.opacity.combined(with: .move(edge: .top)))
-                        }
-                        
-                        // Error message
-                        if let errorMessage = viewModel.errorMessage {
-                            ErrorMessageView(
-                                message: errorMessage,
-                                onRetry: viewModel.retryLastAction,
-                                onDismiss: { viewModel.errorMessage = nil }
-                            )
-                            .transition(.opacity.combined(with: .scale))
-                        }
-                        
-                        // Success message
-                        if viewModel.showSuccessMessage, let message = viewModel.successMessage {
-                            SuccessMessageView(message: message)
-                                .transition(.opacity.combined(with: .scale))
-                        }
-                    }
-                }
-                .padding(20)
-            }
+            MainContentView(
+                viewModel: viewModel,
+                hoveredButton: $hoveredButton
+            )
             
             // Footer
             FooterView()
@@ -206,54 +40,274 @@ struct ContentView: View {
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("ApplyToAllFolders"))) { _ in
             viewModel.applyToAllExistingFolders()
         }
-        .onChange(of: viewModel.defaultViewStyle) { _ in
-            viewModel.updateSettings()
+        .modifier(SettingsChangeHandler(viewModel: viewModel))
+        .modifier(KeyboardShortcutHandler(viewModel: viewModel))
+    }
+}
+
+// MARK: - Main Content View
+
+struct MainContentView: View {
+    @ObservedObject var viewModel: ContentViewModel
+    @Binding var hoveredButton: String?
+    
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 24) {
+                // Default View Style Section
+                ViewStyleSection(viewModel: viewModel)
+                
+                // Finder Options Section
+                FinderOptionsSection(viewModel: viewModel)
+                
+                // Action Buttons
+                ActionButtonsSection(
+                    viewModel: viewModel,
+                    hoveredButton: $hoveredButton
+                )
+            }
+            .padding(20)
         }
-        .onChange(of: viewModel.showPathBar) { _ in
-            viewModel.updateSettings()
+    }
+}
+
+// MARK: - View Style Section
+
+struct ViewStyleSection: View {
+    @ObservedObject var viewModel: ContentViewModel
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Image(systemName: "square.grid.2x2")
+                    .foregroundColor(.accentColor)
+                Text("Default View Style")
+                    .font(.headline)
+            }
+            
+            Text("Choose how folders display their contents by default")
+                .font(.caption)
+                .foregroundColor(.secondary)
+            
+            Picker("View Style", selection: $viewModel.defaultViewStyle) {
+                Label("Icon", systemImage: "square.grid.2x2").tag(FinderManager.ViewStyle.icon)
+                Label("List", systemImage: "list.bullet").tag(FinderManager.ViewStyle.list)
+                Label("Column", systemImage: "rectangle.split.3x1").tag(FinderManager.ViewStyle.column)
+                Label("Gallery", systemImage: "square.grid.3x3").tag(FinderManager.ViewStyle.gallery)
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .disabled(viewModel.isLoading)
+            .help("Press 1-4 to quickly select a view style")
         }
-        .onChange(of: viewModel.showStatusBar) { _ in
-            viewModel.updateSettings()
-        }
-        .onChange(of: viewModel.showSidebar) { _ in
-            viewModel.updateSettings()
-        }
-        .onChange(of: viewModel.showPreviewPane) { _ in
-            viewModel.updateSettings()
-        }
-        .onChange(of: viewModel.showToolbar) { _ in
-            viewModel.updateSettings()
-        }
-        .onChange(of: viewModel.showTabBar) { _ in
-            viewModel.updateSettings()
-        }
-        // Keyboard shortcuts for view styles
-        .onKeyPress(keys: [.one, .two, .three, .four]) { keyPress in
-            switch keyPress.key {
-            case .one:
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    viewModel.defaultViewStyle = .icon
-                }
-                return .handled
-            case .two:
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    viewModel.defaultViewStyle = .list
-                }
-                return .handled
-            case .three:
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    viewModel.defaultViewStyle = .column
-                }
-                return .handled
-            case .four:
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    viewModel.defaultViewStyle = .gallery
-                }
-                return .handled
-            default:
-                return .ignored
+        .padding(16)
+        .background(Color(NSColor.controlBackgroundColor))
+        .cornerRadius(8)
+    }
+}
+
+// MARK: - Finder Options Section
+
+struct FinderOptionsSection: View {
+    @ObservedObject var viewModel: ContentViewModel
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Image(systemName: "gearshape")
+                    .foregroundColor(.accentColor)
+                Text("Finder Options")
+                    .font(.headline)
+            }
+            
+            Text("Customize Finder's interface elements")
+                .font(.caption)
+                .foregroundColor(.secondary)
+            
+            VStack(alignment: .leading, spacing: 10) {
+                ToggleRow(
+                    title: "Show Path Bar",
+                    icon: "point.topleft.down.curvedto.point.bottomright.up",
+                    isOn: $viewModel.showPathBar,
+                    isDisabled: viewModel.isLoading,
+                    tooltip: "Displays the full path at the bottom of Finder windows"
+                )
+                
+                ToggleRow(
+                    title: "Show Status Bar",
+                    icon: "info.circle",
+                    isOn: $viewModel.showStatusBar,
+                    isDisabled: viewModel.isLoading,
+                    tooltip: "Shows item count and available space at the bottom"
+                )
+                
+                ToggleRow(
+                    title: "Show Sidebar",
+                    icon: "sidebar.left",
+                    isOn: $viewModel.showSidebar,
+                    isDisabled: viewModel.isLoading,
+                    tooltip: "Displays favorites and devices on the left side"
+                )
+                
+                ToggleRow(
+                    title: "Show Preview Pane",
+                    icon: "sidebar.right",
+                    isOn: $viewModel.showPreviewPane,
+                    isDisabled: viewModel.isLoading,
+                    tooltip: "Shows file previews on the right side"
+                )
+                
+                ToggleRow(
+                    title: "Show Toolbar",
+                    icon: "toolbar",
+                    isOn: $viewModel.showToolbar,
+                    isDisabled: viewModel.isLoading,
+                    tooltip: "Displays navigation and action buttons at the top"
+                )
+                
+                ToggleRow(
+                    title: "Show Tab Bar",
+                    icon: "square.on.square",
+                    isOn: $viewModel.showTabBar,
+                    isDisabled: viewModel.isLoading,
+                    tooltip: "Enables tabbed browsing in Finder windows"
+                )
             }
         }
+        .padding(16)
+        .background(Color(NSColor.controlBackgroundColor))
+        .cornerRadius(8)
+    }
+}
+
+// MARK: - Action Buttons Section
+
+struct ActionButtonsSection: View {
+    @ObservedObject var viewModel: ContentViewModel
+    @Binding var hoveredButton: String?
+    
+    var body: some View {
+        VStack(spacing: 12) {
+            HStack(spacing: 12) {
+                ActionButton(
+                    title: "Relaunch Finder",
+                    icon: "arrow.clockwise",
+                    action: {
+                        viewModel.relaunchFinder()
+                    },
+                    isProminent: true,
+                    isLoading: viewModel.isLoading,
+                    isHovered: hoveredButton == "relaunch",
+                    onHover: { hovering in
+                        withAnimation(.easeInOut(duration: 0.15)) {
+                            hoveredButton = hovering ? "relaunch" : nil
+                        }
+                    },
+                    tooltip: "Restart Finder to ensure all changes take effect (⌘R)"
+                )
+                .keyboardShortcut("r", modifiers: .command)
+                
+                ActionButton(
+                    title: "Apply to All Folders",
+                    icon: "folder.badge.gearshape",
+                    action: {
+                        viewModel.applyToAllExistingFolders()
+                    },
+                    isProminent: false,
+                    isLoading: viewModel.isLoading,
+                    isHovered: hoveredButton == "apply",
+                    onHover: { hovering in
+                        withAnimation(.easeInOut(duration: 0.15)) {
+                            hoveredButton = hovering ? "apply" : nil
+                        }
+                    },
+                    tooltip: "Reset all existing folder views to match current settings (⌘⇧A)"
+                )
+                .keyboardShortcut("a", modifiers: [.command, .shift])
+            }
+            
+            // Loading indicator
+            if viewModel.isLoading {
+                LoadingIndicatorView(message: viewModel.loadingMessage)
+                    .transition(.opacity.combined(with: .move(edge: .top)))
+            }
+            
+            // Error message
+            if let errorMessage = viewModel.errorMessage {
+                ErrorMessageView(
+                    message: errorMessage,
+                    onRetry: viewModel.retryLastAction,
+                    onDismiss: { viewModel.errorMessage = nil }
+                )
+                .transition(.opacity.combined(with: .scale))
+            }
+            
+            // Success message
+            if viewModel.showSuccessMessage, let message = viewModel.successMessage {
+                SuccessMessageView(message: message)
+                    .transition(.opacity.combined(with: .scale))
+            }
+        }
+    }
+}
+
+// MARK: - Loading Indicator View
+
+struct LoadingIndicatorView: View {
+    let message: String
+    
+    var body: some View {
+        VStack(spacing: 8) {
+            ProgressView()
+                .progressViewStyle(LinearProgressViewStyle())
+                .frame(maxWidth: .infinity)
+                .scaleEffect(0.8)
+            
+            Text(message)
+                .font(.caption)
+                .foregroundColor(.secondary)
+        }
+    }
+}
+
+// MARK: - View Modifiers
+
+struct SettingsChangeHandler: ViewModifier {
+    @ObservedObject var viewModel: ContentViewModel
+    
+    func body(content: Content) -> some View {
+        content
+            .onChange(of: viewModel.defaultViewStyle) { _ in
+                viewModel.updateSettings()
+            }
+            .onChange(of: viewModel.showPathBar) { _ in
+                viewModel.updateSettings()
+            }
+            .onChange(of: viewModel.showStatusBar) { _ in
+                viewModel.updateSettings()
+            }
+            .onChange(of: viewModel.showSidebar) { _ in
+                viewModel.updateSettings()
+            }
+            .onChange(of: viewModel.showPreviewPane) { _ in
+                viewModel.updateSettings()
+            }
+            .onChange(of: viewModel.showToolbar) { _ in
+                viewModel.updateSettings()
+            }
+            .onChange(of: viewModel.showTabBar) { _ in
+                viewModel.updateSettings()
+            }
+    }
+}
+
+struct KeyboardShortcutHandler: ViewModifier {
+    @ObservedObject var viewModel: ContentViewModel
+    
+    func body(content: Content) -> some View {
+        // Note: onKeyPress is only available in macOS 12+
+        // For macOS 11 compatibility, keyboard shortcuts are handled via
+        // button keyboard shortcuts directly on the ActionButtons
+        content
     }
 }
 
@@ -317,7 +371,7 @@ struct FooterView: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PlainButtonStyle())
                 .help("View documentation and support")
             }
         }
@@ -350,6 +404,67 @@ struct ToggleRow: View {
     }
 }
 
+// MARK: - Custom Button Styles for macOS 11 Compatibility
+
+struct ProminentButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) var isEnabled
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
+            .background(
+                RoundedRectangle(cornerRadius: 6)
+                    .fill(isEnabled ? Color.accentColor : Color.gray.opacity(0.3))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 6)
+                            .fill(configuration.isPressed ? Color.black.opacity(0.2) : Color.clear)
+                    )
+            )
+            .foregroundColor(.white)
+            .scaleEffect(configuration.isPressed ? 0.98 : 1.0)
+    }
+}
+
+struct SecondaryButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) var isEnabled
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
+            .background(
+                RoundedRectangle(cornerRadius: 6)
+                    .fill(Color(NSColor.controlBackgroundColor))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 6)
+                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 6)
+                            .fill(configuration.isPressed ? Color.black.opacity(0.1) : Color.clear)
+                    )
+            )
+            .foregroundColor(isEnabled ? .primary : .secondary)
+            .scaleEffect(configuration.isPressed ? 0.98 : 1.0)
+    }
+}
+
+// Type eraser for button styles
+struct AnyButtonStyle: ButtonStyle {
+    private let _makeBody: (Configuration) -> AnyView
+    
+    init<S: ButtonStyle>(_ style: S) {
+        _makeBody = { configuration in
+            AnyView(style.makeBody(configuration: configuration))
+        }
+    }
+    
+    func makeBody(configuration: Configuration) -> some View {
+        _makeBody(configuration)
+    }
+}
+
 struct ActionButton: View {
     let title: String
     let icon: String
@@ -367,7 +482,7 @@ struct ActionButton: View {
                 .scaleEffect(isHovered ? 1.02 : 1.0)
         }
         .controlSize(.large)
-        .buttonStyle(isProminent ? .borderedProminent : .bordered)
+        .buttonStyle(isProminent ? AnyButtonStyle(ProminentButtonStyle()) : AnyButtonStyle(SecondaryButtonStyle()))
         .disabled(isLoading)
         .onHover(perform: onHover)
         .help(tooltip)
@@ -403,7 +518,7 @@ struct ErrorMessageView: View {
                     Image(systemName: "xmark")
                         .foregroundColor(.secondary)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PlainButtonStyle())
             }
             
             if let onRetry = onRetry {

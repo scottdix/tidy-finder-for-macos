@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "TidyFinder",
     platforms: [
-        .macOS(.v11)
+        .macOS(.v13)
     ],
     products: [
         // Library that can be imported by external projects
