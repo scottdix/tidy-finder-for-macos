@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var showingSuccessAlert = false
     @State private var successMessage = ""
     @State private var hoveredButton: String? = nil
+    @State private var selectedTab = "settings"
     @FocusState private var isWindowFocused: Bool
     
     var body: some View {
@@ -20,16 +21,27 @@ struct ContentView: View {
             // Header
             HeaderView()
             
+            // Tab selection
+            TabSelectionView(selectedTab: $selectedTab)
+            
             // Main content
-            MainContentView(
-                viewModel: viewModel,
-                hoveredButton: $hoveredButton
-            )
+            Group {
+                if selectedTab == "settings" {
+                    MainContentView(
+                        viewModel: viewModel,
+                        hoveredButton: $hoveredButton
+                    )
+                } else if selectedTab == "template" {
+                    TemplateFolderView()
+                } else if selectedTab == "profiles" {
+                    ProfilesView(contentViewModel: viewModel)
+                }
+            }
             
             // Footer
             FooterView()
         }
-        .frame(minWidth: 520, maxWidth: 800, minHeight: 640, maxHeight: 900)
+        .frame(minWidth: 600, maxWidth: 1000, minHeight: 780, maxHeight: 1000)
         .focused($isWindowFocused)
         .onAppear {
             isWindowFocused = true
@@ -56,6 +68,9 @@ struct MainContentView: View {
             VStack(alignment: .leading, spacing: 24) {
                 // Default View Style Section
                 ViewStyleSection(viewModel: viewModel)
+                
+                // Preview Gallery Section
+                PreviewGalleryView(viewModel: viewModel)
                 
                 // Finder Options Section
                 FinderOptionsSection(viewModel: viewModel)
@@ -378,6 +393,66 @@ struct FooterView: View {
         .padding(.horizontal, 20)
         .padding(.vertical, 14)
         .background(Color(NSColor.controlBackgroundColor))
+    }
+}
+
+// MARK: - Tab Selection View
+
+struct TabSelectionView: View {
+    @Binding var selectedTab: String
+    
+    var body: some View {
+        HStack(spacing: 0) {
+            TabButton(
+                title: "Settings",
+                icon: "gearshape",
+                isSelected: selectedTab == "settings",
+                action: { selectedTab = "settings" }
+            )
+            
+            TabButton(
+                title: "Template Folder",
+                icon: "folder.badge.questionmark",
+                isSelected: selectedTab == "template",
+                action: { selectedTab = "template" }
+            )
+            
+            TabButton(
+                title: "Profiles",
+                icon: "person.2.badge.gearshape",
+                isSelected: selectedTab == "profiles",
+                action: { selectedTab = "profiles" }
+            )
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 8)
+        .background(Color(NSColor.controlBackgroundColor).opacity(0.5))
+    }
+}
+
+struct TabButton: View {
+    let title: String
+    let icon: String
+    let isSelected: Bool
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            HStack {
+                Image(systemName: icon)
+                    .font(.subheadline)
+                Text(title)
+                    .font(.subheadline)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 6)
+            .background(
+                RoundedRectangle(cornerRadius: 6)
+                    .fill(isSelected ? Color.accentColor : Color.clear)
+            )
+            .foregroundColor(isSelected ? .white : .primary)
+        }
+        .buttonStyle(PlainButtonStyle())
     }
 }
 

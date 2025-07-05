@@ -79,4 +79,70 @@ public class FinderManager {
             return false
         }
     }
+    
+    public func copyFolderViewSettings(from sourceURL: URL, to targetURLs: [URL]) throws {
+        let fileManager = FileManager.default
+        let dsStoreName = ".DS_Store"
+        
+        // Verify source folder exists and has .DS_Store
+        let sourceDSStore = sourceURL.appendingPathComponent(dsStoreName)
+        guard fileManager.fileExists(atPath: sourceDSStore.path) else {
+            throw FinderManagerError.missingDSStore(folder: sourceURL.lastPathComponent)
+        }
+        
+        // Read source .DS_Store data
+        let sourceData = try Data(contentsOf: sourceDSStore)
+        
+        // Copy to each target folder
+        for targetURL in targetURLs {
+            let targetDSStore = targetURL.appendingPathComponent(dsStoreName)
+            
+            // Ensure target folder exists
+            guard fileManager.fileExists(atPath: targetURL.path) else {
+                print("Warning: Target folder doesn't exist: \(targetURL.path)")
+                continue
+            }
+            
+            do {
+                // Remove existing .DS_Store if present
+                if fileManager.fileExists(atPath: targetDSStore.path) {
+                    try fileManager.removeItem(at: targetDSStore)
+                }
+                
+                // Write source data to target
+                try sourceData.write(to: targetDSStore, options: .atomic)
+                
+                // Set file attributes to match original .DS_Store behavior
+                try fileManager.setAttributes([
+                    .posixPermissions: 0o644  // rw-r--r--
+                ], ofItemAtPath: targetDSStore.path)
+                
+                // Make file hidden using chflags command
+                let hideCommand = "chflags hidden \"\(targetDSStore.path)\""
+                try ShellRunner.execute(command: hideCommand)
+                
+                print("Successfully copied view settings to: \(targetURL.lastPathComponent)")
+            } catch {
+                print("Failed to copy settings to \(targetURL.lastPathComponent): \(error)")
+                // Continue with other folders even if one fails
+            }
+        }
+    }
+}
+
+public enum FinderManagerError: LocalizedError {
+    case missingDSStore(folder: String)
+    case invalidFolder(path: String)
+    case permissionDenied(path: String)
+    
+    public var errorDescription: String? {
+        switch self {
+        case .missingDSStore(let folder):
+            return "The folder '\(folder)' doesn't have any view settings (.DS_Store file) to copy."
+        case .invalidFolder(let path):
+            return "Invalid folder path: \(path)"
+        case .permissionDenied(let path):
+            return "Permission denied accessing: \(path)"
+        }
+    }
 }

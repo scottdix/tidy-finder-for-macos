@@ -133,6 +133,54 @@ class ContentViewModel: ObservableObject {
         lastAction?()
     }
     
+    // MARK: - Profile Methods
+    func saveCurrentAsProfile(name: String) -> Profile {
+        return Profile(
+            name: name,
+            viewStyle: defaultViewStyle,
+            showPathBar: showPathBar,
+            showStatusBar: showStatusBar,
+            showSidebar: showSidebar,
+            showPreviewPane: showPreviewPane,
+            showToolbar: showToolbar,
+            showTabBar: showTabBar
+        )
+    }
+    
+    func loadProfile(_ profile: Profile) {
+        Task {
+            isLoading = true
+            errorMessage = nil
+            lastAction = { [weak self] in self?.loadProfile(profile) }
+            loadingMessage = "Loading profile '\(profile.name)'..."
+            
+            do {
+                // Update UI state
+                self.defaultViewStyle = profile.viewStyle
+                self.showPathBar = profile.showPathBar
+                self.showStatusBar = profile.showStatusBar
+                self.showSidebar = profile.showSidebar
+                self.showPreviewPane = profile.showPreviewPane
+                self.showToolbar = profile.showToolbar
+                self.showTabBar = profile.showTabBar
+                
+                // Apply settings to Finder
+                try finderManager.setDefaultViewStyle(to: profile.viewStyle)
+                try finderManager.setGlobalOption(.showPathBar, to: profile.showPathBar)
+                try finderManager.setGlobalOption(.showStatusBar, to: profile.showStatusBar)
+                try finderManager.setGlobalOption(.showSidebar, to: profile.showSidebar)
+                try finderManager.setGlobalOption(.showPreviewPane, to: profile.showPreviewPane)
+                // Note: showToolbar and showTabBar are not available in FinderManager
+                
+                isLoading = false
+                showSuccess("Profile '\(profile.name)' loaded successfully")
+            } catch {
+                isLoading = false
+                showError("Failed to load profile '\(profile.name)'", error: error)
+            }
+        }
+    }
+    
     // MARK: - Private Methods
     private func showSuccess(_ message: String) {
         successMessage = message

@@ -43,6 +43,16 @@ struct TidyFinderApp: App {
                     )
                 }
                 .keyboardShortcut("a", modifiers: [.command, .shift])
+                
+                Divider()
+                
+                Button("Apply Template Settings") {
+                    NotificationCenter.default.post(
+                        name: Notification.Name("ApplyTemplateSettings"),
+                        object: nil
+                    )
+                }
+                .keyboardShortcut("t", modifiers: [.command, .shift])
             }
         }
     }
